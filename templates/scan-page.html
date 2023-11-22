@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>RSUDMA Cup 2023</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='img/logo.png') }}" rel="icon">
+  <!-- <link href="{{ url_for('static', filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon"> -->
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static',filename='vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static',filename='css/style.css')}}" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top header-transparent">
+    <div class="container d-flex align-items-center justify-content-center position-relative">
+
+      <div class="logo">
+        <a href="{{url_for('index')}}"><img src="{{url_for('static',filename='img/LOGO-RSUDMA.png')}}" alt=""
+            class="img-fluid"></a>
+        <a href="{{ url_for('index') }}"><img src="{{url_for('static',filename='img/logo.png')}}" style="height: 100px;"
+            alt="" class="img-fluid"></a>
+      </div>
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <br>
+      <h2>Sesuaikan Pada Posisi yang telah ditentukan</h2>
+      <div style="width: 600px; background-color: aliceblue;" id="reader"></div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+  </main><!-- End #main -->
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='vendor/purecounter/purecounter_vanilla.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/aos/aos.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='js/qr-code/html5-qrcode.min.js')}}"></script>
+
+
+  <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/jquery-3.7.1/jquery-3.7.1.min.js')}}"></script>
+
+  <script>
+
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader", {
+      fps: 9, qrbox: {
+        width: 600, height: 600
+      }
+    });
+    html5QrcodeScanner.render(onScanSuccess);
+
+    function onScanSuccess(decodedText, decodedResult) {
+      html5QrcodeScanner.pause();
+      $.ajax({
+        type: "POST",
+        url: 'checkScan',
+        data: {
+          code: decodedText,
+        },
+        success: function (res) {
+          if (res.metadata.code == '200') {
+            window.location.href = 'http://127.0.0.1:5000/dataPemain/'+res.response
+          } else {
+            alert('QR Code tidak Valid')
+            html5QrcodeScanner.resume()
+          }
+        },
+        error: function (error) {
+          location.reload();
+        }
+      });
+
+    }
+  </script>
+</body>
+
+</html>

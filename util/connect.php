@@ -1,7 +1,8 @@
 <?php
 $server = "localhost";
 $username = "root";
-$password = "";
+// $password = "";
+$password = "4ndr3";
 $database = "rsudma_cup";
 $connect = mysqli_connect($server, $username, $password, $database, 3306) or die("Connection Failed");
 try {

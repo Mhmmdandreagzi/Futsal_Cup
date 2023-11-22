@@ -150,7 +150,7 @@ if (!isset($_SESSION['auth'])) {
                             <tbody>
                                 <?php
                                 include 'util/connect.php';
-                                $q = "SELECT * FROM msttim ORDER BY idmsttim DESC";
+                                $q = "SELECT * FROM msttim WHERE is_menang = 1 ORDER BY idmsttim DESC";
                                 $query = mysqli_query($connect, $q) or die($connect);
                                 $inc= 1;
                                 while ($rs = mysqli_fetch_array($query)) {
