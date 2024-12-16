@@ -42,9 +42,18 @@ $selectedTim = $_POST['selectedTim'];
                 </div>
             </div>
             <div class="form-group col-md-6">
-                <label class="control-label" for="uploadFile"><b>SK</b></label>
-                <div class="file-container">
-                    <input type="file" class="form-control" id="uploadFilePemain" accept="">
+                <div id="form_ktp">
+                    <label class="control-label" for="uploadFile"><b>SK</b></label>
+                    <div class="file-container">
+                        <input type="file" class="form-control" id="uploadFilePemain" accept="">
+                    </div>
+                </div>
+                <br>
+                <div id="form_rekom">
+                    <label class="control-label" for="uploadFile"><b>Rekom</b></label>
+                    <div class="file-container">
+                        <input type="file" class="form-control" id="uploadRekomPemain" accept="">
+                    </div>
                 </div>
                 <br>
                 <div id="form_ktp">
@@ -97,6 +106,13 @@ $selectedTim = $_POST['selectedTim'];
                             <?php
                             if ($rs['path_ktp'] != '') { ?>
                                 <button type="button" class="btn btn-info btnLihatFile" data-url="<?= $rs['path_ktp'] ?>"><i class="bi bi-card-heading text-white"></i>&nbsp;<span class="text-white">KTP</span></button>
+                            <?php } else { ?>
+                                <span> <i class="bi bi-x-circle-fill text-danger"></i>&nbsp; KTP </span>
+                            <?php } ?>
+                            &nbsp;&nbsp;
+                            <?php
+                            if ($rs['path_rekom'] != '') { ?>
+                                <button type="button" class="btn btn-success btnLihatFile" data-url="<?= $rs['path_rekom'] ?>"><i class="bi bi-card-heading text-white"></i>&nbsp;<span class="text-white">Rekom</span></button>
                             <?php } else { ?>
                                 <span> <i class="bi bi-x-circle-fill text-danger"></i>&nbsp; KTP </span>
                             <?php } ?>
@@ -282,6 +298,13 @@ $selectedTim = $_POST['selectedTim'];
                     fd.append('ktpPemain', ktpPemain);
                 } else {
                     fd.append('ktpPemain', null);
+                }
+
+                if ($('#uploadRekomPemain').val()) {
+                    let rekomPemain = $('#uploadRekomPemain')[0].files[0];
+                    fd.append('rekomPemain', rekomPemain);
+                } else {
+                    fd.append('rekomPemain', null);
                 }
 
                 fd.append('namaTim', namaTim);

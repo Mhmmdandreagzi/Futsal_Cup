@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>RSUDMA Cup 2023</title>
+    <title>RSUDMA Cup 2024</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="static/img/logo.png" rel="icon">
+    <link href="static/img/Logo-RSUDMA-CUP-2024.png" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -64,7 +64,7 @@
     <section id="hero">
         <div class="hero-container" data-aos="fade-up">
             <h2 style="margin-bottom: 10px;">Selamat Datang Di Turnamen Futsal</h2>
-            <h1 style="font-family: 'Bebas Neue', sans-serif; letter-spacing : 10px;">RSUDMA CUP 2023</h1>
+            <h1 style="font-family: 'Bebas Neue', sans-serif; letter-spacing : 10px;">RSUDMA CUP 2024</h1>
             <h2></h2>
             <a href="javascript:void(0)" onclick="getPage('scan-page.php')" class="btn-get-started"><i class="bx bx-qr-scan"></i></a>
             <h2>Scan Qr</h2>

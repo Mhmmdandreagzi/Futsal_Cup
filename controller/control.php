@@ -18,7 +18,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
             getDataTim($_POST['idmsttim']);
             break;
         case 'simpanPemain':
-            simpanPemain($_POST['namaPemain'], $_POST['tipePemain'], (isset($_FILES['fotoPemain'])) ? $_FILES['fotoPemain'] : null, (isset($_FILES['filePemain'])) ? $_FILES['filePemain'] : null, (isset($_FILES['ktpPemain'])) ? $_FILES['ktpPemain'] : null, $_POST['namaTim'], $_POST['idmsttim']);
+            simpanPemain($_POST['namaPemain'], $_POST['tipePemain'], (isset($_FILES['fotoPemain'])) ? $_FILES['fotoPemain'] : null, (isset($_FILES['filePemain'])) ? $_FILES['filePemain'] : null, (isset($_FILES['ktpPemain'])) ? $_FILES['ktpPemain'] : null, (isset($_FILES['rekomPemain'])) ? $_FILES['rekomPemain'] : null, $_POST['namaTim'], $_POST['idmsttim']);
             break;
         case 'hapusDataPemain':
             hapusDataPemain($_POST['idpemain']);
@@ -52,7 +52,7 @@ function hapusDataPemain($idpemain){
 
 }
 
-function simpanPemain($nama, $tipe, $foto, $file, $ktp, $namaTim, $idmsttim)
+function simpanPemain($nama, $tipe, $foto, $file, $ktp,$rekom ,$namaTim, $idmsttim)
 {
     global $connect;
     // echo $namaTim;
@@ -87,6 +87,7 @@ function simpanPemain($nama, $tipe, $foto, $file, $ktp, $namaTim, $idmsttim)
     }else {
         $urlFile = "";
     }
+
     if ($ktp) {
         $newFolderKtp = "../upload/$namaTim/ktp";
         if (is_dir($newFolderKtp) === false) {
@@ -101,7 +102,21 @@ function simpanPemain($nama, $tipe, $foto, $file, $ktp, $namaTim, $idmsttim)
         $urlKtp = "";
     }
 
-    $insert = "INSERT INTO mstpemain (idmsttim,nama_pemain,status_pemain,path_foto,path_sk,path_ktp) VALUE($idmsttim,'$nama','$tipe','$urlFoto','$urlFile','$urlKtp')";
+    if ($rekom) {
+        $newFolderRekom = "../upload/$namaTim/rekom";
+        if (is_dir($newFolderRekom) === false) {
+            mkdir($newFolderRekom);
+        }
+        $tempRekom = explode(".", $rekom['name']);
+        $newRekomName = "KTP_" . $nama . "_" . round(microtime(true)) . '.' . end($tempRekom);
+        $urlRekom = "upload/$namaTim/rekom/" . $newRekomName;
+        $pathRekom = "../" . $urlRekom;
+        move_uploaded_file($rekom['tmp_name'], $pathRekom);
+    } else {
+        $urlRekom = "";
+    }
+
+    $insert = "INSERT INTO mstpemain (idmsttim,nama_pemain,status_pemain,path_foto,path_sk,path_ktp,path_rekom) VALUE($idmsttim,'$nama','$tipe','$urlFoto','$urlFile','$urlKtp','$urlRekom')";
     $nonQuery = mysqli_query($connect, $insert) or die(mysqli_error($connect));
     if ($nonQuery) {
         echo 'Berhasil';
@@ -114,7 +129,7 @@ function checkQr($code)
 {
     global $connect;
     $data = array(0);
-    $query = "SELECT * FROM msttim WHERE code_tim = '$code'";
+    $query = "SELECT * FROM msttim WHERE code_tim = 'RSMACUP-".$code."' AND periode = '2024'";
     $q = mysqli_query($connect, $query) or die(mysqli_error($connect));
     echo json_encode(mysqli_fetch_assoc($q));
 }
@@ -128,7 +143,7 @@ function simpanTim($nama, $ofc1, $noofc1, $ofc2, $noofc2, $tipeTim)
         $row = mysqli_num_rows($chekData);
     } while ($row != 0);
 
-    $insert = "INSERT INTO msttim(code_tim,nama_tim,nama_official_1,no_official_1,nama_official_2,no_official_2,tipe_tim) VALUE('$code','$nama','$ofc1','$noofc1','$ofc2','$noofc2','$tipeTim')";
+    $insert = "INSERT INTO msttim(code_tim,nama_tim,nama_official_1,no_official_1,nama_official_2,no_official_2,tipe_tim,periode,is_menang) VALUE('$code','$nama','$ofc1','$noofc1','$ofc2','$noofc2','$tipeTim','2024',0)";
     $nonQuery = mysqli_query($connect, $insert) or die(mysqli_error($connect));
     if ($nonQuery) {
         echo 'Berhasil';

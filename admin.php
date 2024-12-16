@@ -16,12 +16,12 @@ if (!isset($_SESSION['auth'])) {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>RSUDMA Cup 2023</title>
+    <title>RSUDMA Cup 2024</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="static/img/logo.png" rel="icon">
+    <link href="static/img/Logo-RSUDMA-CUP-2024.png" rel="icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -95,13 +95,13 @@ if (!isset($_SESSION['auth'])) {
                 <div class="col-lg-4 no-padding">
                     <div class="logo" style="margin-right: 20px;">
                         <a href="index.php"><img src="static/img/LOGO-RSUDMA.png" style="height: 45px;" alt="" class="img-fluid"></a>
-                        <a href="index.php"><img src="static/img/logo.png" alt="" class="img-fluid" style="margin-left: 10px; margin-right: 0px; height: 45px;"></a>
-                        <a href="index.php"><img src="static/img/logo-hkn59-stroke.png" style="height: 45px;" alt="" class="img-fluid"></a>
+                        <a href="index.php"><img src="static/img/Logo-RSUDMA-CUP-2024.png" alt="" class="img-fluid" style="margin-left: 10px; margin-right: 0px; height: 45px;"></a>
+                        <a href="index.php"><img src="static/img/logo_hkn_60.png" style="height: 45px;" alt="" class="img-fluid"></a>
                     </div>
                 </div>
                 <div class="col-lg-4 no-padding">
                     <center>
-                        <h1 style="font-family: 'Bebas Neue', sans-serif; letter-spacing : 7px; margin-bottom: 0px;">RSUDMA CUP 2023</h1>
+                        <h1 style="font-family: 'Bebas Neue', sans-serif; letter-spacing : 7px; margin-bottom: 0px;">RSUDMA CUP 2024</h1>
                     </center>
                 </div>
                 <div class="col-lg-4 no-padding">
@@ -121,7 +121,7 @@ if (!isset($_SESSION['auth'])) {
     </header><!-- End Header -->
 
     <main id="main">
-        <section id="about" style="background-image: url('static/img/background_futsal.jpg');">
+        <section id="about" style="background-image: url('static/img/background_futsal_lagi.jpg');">
             <div class="container position-relative aos-init aos-animate" data-aos="fade-up">
                 <div class="row">
                     <div class="col-lg-6">
@@ -150,7 +150,7 @@ if (!isset($_SESSION['auth'])) {
                             <tbody>
                                 <?php
                                 include 'util/connect.php';
-                                $q = "SELECT * FROM msttim WHERE is_menang = 1 ORDER BY idmsttim DESC";
+                                $q = "SELECT * FROM msttim WHERE is_menang = 0 and periode = '2024' ORDER BY idmsttim DESC ";
                                 $query = mysqli_query($connect, $q) or die($connect);
                                 $inc= 1;
                                 while ($rs = mysqli_fetch_array($query)) {
@@ -198,13 +198,16 @@ if (!isset($_SESSION['auth'])) {
                     <br>
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="namaTim" class="control-label"><b>Nama Tim <span class="text-danger">*</span></b></label>
+                            <label for="namaTim" class="control-label"><b>Kategori <span class="text-danger">*</span></b></label>
                             <select id="tipeTim" class="form-control">
                                 <option value=""></option>
                                 <option value="OPD">OPD</option>
                                 <option value="Kecamatan">Kecamatan</option>
                                 <option value="Puskesmas">Puskesmas</option>
                                 <option value="Instansi Vertikal">Instansi Vertikal</option>
+                                <option value="Rumah Sakit">Rumah Sakit</option>
+                                <option value="Klinik Kesehatan">Klinik Kesehatan</option>
+                                
                             </select>
                         </div>
                     </div>
@@ -270,7 +273,7 @@ if (!isset($_SESSION['auth'])) {
     </div>
 
     <div class="modal fade" id="modal-list-pemain" tabindex="-1">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl" style="max-width: 90%;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="title_modal_pemain">List Pemain</h5>

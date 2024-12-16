@@ -60,6 +60,13 @@ $dataTim = $_POST['dataTim'];
                             <?php } else { ?>
                                 <span> <i class="bi bi-x-circle-fill text-danger"></i>&nbsp; KTP </span>
                             <?php } ?>
+                            &nbsp;&nbsp;
+                            <?php
+                            if ($rs['path_rekom'] != '') { ?>
+                                <button type="button" class="btn btn-success btnLihatFile" data-url="<?= $rs['path_rekom'] ?>"><i class="bi bi-card-heading text-white"></i>&nbsp;<span class="text-white">Rekom</span></button>
+                            <?php } else { ?>
+                                <span> <i class="bi bi-x-circle-fill text-danger"></i>&nbsp; KTP </span>
+                            <?php } ?>
 
                         </td>
           </tr>
