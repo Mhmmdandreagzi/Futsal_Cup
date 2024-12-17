@@ -31,7 +31,6 @@ $dataTim = $_POST['dataTim'];
         <tr>
           <th style="text-align: center; vertical-align: middle;">#</th>
           <th style="text-align: center; vertical-align: middle;">Nama Pemain</th>
-          <th style="text-align: center; vertical-align: middle;">Status Pemain</th>
           <th style="text-align: center; vertical-align: middle;">Dokumen</th>
         </tr>
       </thead>
@@ -45,7 +44,6 @@ $dataTim = $_POST['dataTim'];
           <tr>
             <td><a href="javascript:void(0)"><img src="<?= $rs['path_foto'] != '' ? $rs['path_foto']  : "static/img/users.jpg" ?>" class="btnLihatFile" data-url="<?= $rs['path_foto'] != '' ? $rs['path_foto']  : "static/img/users.jpg" ?>" style="object-fit: cover; width:150px; height:200px; border-radius:20px" /></a></td>
             <td style="text-align: center; vertical-align: middle;"><?= $rs['nama_pemain'] ?></td>
-            <td style="text-align: center; vertical-align: middle;"><?= $rs['status_pemain'] ?></td>
             <td style="vertical-align: middle;">
                             <?php
                             if ($rs['path_sk'] != '') { ?>
